@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1883 - The Raw Journey West</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #f3e9d6;
+            --parchment-dark: #e0d5bc;
+            --ink: #2a2118;
+            --blood: #8b0000;
+            --gold: #d4af37;
+            --leather: #5c3a21;
+            --rust: #b7410e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--leather);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%235c3a21"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="%23452e19" stroke-width="1"/></svg>');
+            color: var(--ink);
+            line-height: 1.6;
+            font-family: 'Old Standard TT', serif;
+            text-rendering: optimizeLegibility;
+        }
+        
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 800 800"><rect width="800" height="800" fill="none" stroke="%23d4af37" stroke-width="2" stroke-dasharray="5,5"/></svg>');
+            color: var(--gold);
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 8px solid var(--blood);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M20,100 Q50,50 80,100 T140,100" fill="none" stroke="%23d4af3755" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        nav {
+            background: linear-gradient(to right, var(--leather), var(--rust));
+            padding: 1rem 0;
+            border-top: 3px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+            position: relative;
+        }
+        
+        nav ul li::after {
+            content: "•";
+            color: var(--gold);
+            position: absolute;
+            right: -1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        nav ul li:last-child::after {
+            display: none;
+        }
+        
+        nav ul li a {
+            color: var(--parchment);
+            text-decoration: none;
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--gold);
+            background-color: rgba(0,0,0,0.3);
+        }
+        
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        nav ul li a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+        
+        section {
+            margin: 3rem 0;
+            padding: 2.5rem;
+            background-color: var(--parchment);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid var(--parchment-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23e0d5bc55" stroke-width="1"/></svg>');
+            pointer-events: none;
+        }
+        
+        h1, h2, h3 {
+            color: var(--blood);
+            margin-bottom: 1.5rem;
+            font-family: 'Cinzel Decorative', cursive;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            border-bottom: 3px double var(--gold);
+            padding-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::before, h2::after {
+            content: "✻";
+            color: var(--gold);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        h2::before {
+            left: -40px;
+        }
+        
+        h2::after {
+            right: -40px;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--rust);
+            padding-left: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .episode-list {
+            margin-left: 2rem;
+            position: relative;
+        }
+        
+        .episode-list h3 {
+            border-left: none;
+            padding-left: 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .episode-list h3::before {
+            content: "➵";
+            position: absolute;
+            left: 0;
+            color: var(--rust);
+        }
+        
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .character-card {
+            background-color: var(--parchment-dark);
+            padding: 1.5rem;
+            border-radius: 5px;
+            border-left: 6px solid var(--rust);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .character-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--rust), var(--gold));
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--gold), var(--rust), var(--gold));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: -20px;
+            background-color: var(--parchment);
+            border: 5px solid var(--blood);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 3px var(--gold);
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--gold);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--gold);
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--gold);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--gold) transparent transparent;
+        }
+        
+        .right::after {
+            left: -20px;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--parchment-dark);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid var(--parchment);
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            bottom: 10px;
+            left: 10px;
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            border-radius: 3px;
+            pointer-events: none;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--rust);
+            border-left: 3px solid var(--gold);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            font-size: 1.2rem;
+        }
+        
+        .quote::before {
+            content: "“";
+            position: absolute;
+            left: -1rem;
+            top: -1rem;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        .quote::after {
+            content: "”";
+            position: absolute;
+            right: -1rem;
+            bottom: -2rem;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: var(--blood);
+            color: var(--parchment);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+            }
+            
+            .left::before, .right::before {
+                left: 60px;
+                border: medium solid var(--gold);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--gold) transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            nav ul li::after {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h2::before, h2::after {
+                display: none;
+            }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--leather);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--gold);
+            border-radius: 6px;
+            border: 3px solid var(--leather);
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                box-shadow: 0 0 10px 5px rgba(216, 166, 55, 0.5);
+            }
+            20%, 24%, 55% {
+                box-shadow: 0 0 12px 8px rgba(216, 166, 55, 0.8), 0 0 20px 10px rgba(216, 166, 55, 0.4);
+            }
+        }
+        
+        .candle-light {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--gold), #5c3a21);
+            border-radius: 3px;
+            z-index: 1000;
+            animation: flicker 3s infinite;
+            cursor: pointer;
+        }
+        
+        .candle-light::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            width: 10px;
+            height: 20px;
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            border-radius: 50% 50% 20% 20%;
+            filter: blur(3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="candle-light" title="Click to extinguish"></div>
+    
+    <header>
+        <div class="container">
+            <h1>1883</h1>
+            <p style="font-family: 'Cinzel Decorative', cursive; letter-spacing: 3px; font-size: 1.5rem;">A TALE OF BLOOD, DUST, AND DESTINY</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#overview">The Journey</a></li>
+            <li><a href="#characters">The Travelers</a></li>
+            <li><a href="#episodes">Chronicles</a></li>
+            <li><a href="#timeline">The Trail</a></li>
+            <li><a href="#production">Making Of</a></li>
+            <li><a href="#reception">Praises</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <section id="overview">
+            <h2>The Journey West</h2>
+            <div class="quote">
+                "The frontier is a forge that burns away weakness, leaving only what's strong enough to survive."
+            </div>
+            <p>1883 is an unflinching portrayal of the American Westward Expansion, following the Dutton family's harrowing journey from the ruins of post-Civil War Tennessee to the untamed wilderness of Montana. This is not the romanticized West of dime novels, but the true crucible that forged America.</p>
+            
+            <p>Told through the eyes of Elsa Dutton, the series strips away the mythology to reveal the brutal reality of survival on the frontier - where every decision carries life-or-death consequences, and the land exacts a heavy toll from those who would tame it.</p>
+            
+            <h3>A Nation in Motion</h3>
+            <p>The year 1883 finds America at a crossroads. The wounds of civil war still bleed, while the promise of free land lures thousands westward along trails littered with the bones of those who came before. The Duttons join this human tide, leaving behind everything familiar to gamble on an uncertain future.</p>
+            
+            <div class="badge">Historical Note</div>
+            <div class="badge">The Real West</div>
+            <div class="badge">Dutton Origins</div>
+        </section>
+        
+        <section id="characters">
+            <h2>The Travelers</h2>
+            <p>These are the souls who dared the journey, bound together by necessity and circumstance on the perilous road west.</p>
+            
+            <div class="character-grid">
+                <div class="character-card">
+                    <h3>James Dillard Dutton</h3>
+                    <p>A Confederate captain hardened by war, now leading his family into another kind of battle. His military discipline and survival skills make him invaluable, but the ghosts of his past ride alongside.</p>
+                    <div class="badge">Patriarch</div>
+                    <div class="badge">War Veteran</div>
+                </div>
+                
+                <div class="character-card">
+                    <h3>Margaret Dutton</h3>
+                    <p>The steel-spined matriarch who maintains her faith when all seems lost. Her quiet strength binds the family together even as the journey threatens to tear them apart.</p>
+                    <div class="badge">Matriarch</div>
+                    <div class="badge">Survivor</div>
+                </div>
+                
+                <div class="character-card">
+                    <h3>Elsa Dutton</h3>
+                    <p>Coming of age between civilization and wilderness, her poetic narration belies the harsh lessons she learns about love, loss, and what it truly means to be free on the frontier.</p>
+                    <div class="badge">Narrator</div>
+                    <div class="badge">Spirit of the West</div>
+                </div>
+                
+                <div class="character-card">
+                    <h3>Shea Brennan</h3>
+                    <p>A Pinkerton agent with nothing left to lose, guiding immigrants to Oregon while wrestling with his own demons. His partnership with Thomas forms the backbone of the wagon train's leadership.</p>
+                    <div class="badge">Guide</div>
+                    <div class="badge">Pinkerton</div>
+                </div>
+                
+                <div class="character-card">
+                    <h3>Thomas</h3>
+                    <p>A former buffalo hunter and freed slave whose knowledge of the land proves vital. His friendship with Shea transcends the racial divides of the era.</p>
+                    <div class="badge">Scout</div>
+                    <div class="badge">Buffalo Hunter</div>
+                </div>
+                
+                <div class="character-card">
+                    <h3>The Immigrants</h3>
+                    <p>Germans, Romani, Irish - all seeking the American promise. Their idealism clashes with frontier reality as the journey claims its toll.</p>
+                    <div class="badge">Dreamers</div>
+                    <div class="badge">Casualties</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="episodes">
+            <h2>Chronicles of the Trail</h2>
+            <p>Each chapter in this epic journey reveals new trials and transformations as the travelers move further from civilization and deeper into the heart of the wild.</p>
+            
+            <div class="episode-list">
+                <h3>Episode 1: "1883"</h3>
+                <p>Fort Worth, Texas - The jumping off point where dreams meet reality. The Duttons join a ragtag collection of European immigrants under the guidance of hardened scouts Shea Brennan and Thomas.</p>
+                
+                <h3>Episode 2: "Behind Us, A Cliff"</h3>
+                <p>Crossing into Indian Territory, the wagon train encounters its first life-or-death challenges. Elsa's romantic notions of the West begin to unravel.</p>
+                
+                <h3>Episode 3: "The Crossing"</h3>
+                <p>A treacherous river passage becomes a crucible that forges bonds and reveals true character. The cost of the journey becomes painfully clear.</p>
+                
+                <h3>Episode 4: "The Fangs of Freedom"</h3>
+                <p>The open prairie offers beauty and terror in equal measure. Attacks from both human and natural predators test the group's resolve.</p>
+                
+                <h3>Episode 5: "The Cattle Drive"</h3>
+                <p>James and Shea lead a desperate bid to earn supplies through a cattle drive. Elsa's heart is captured by a cowboy, blurring the lines between passion and survival.</p>
+                
+                <h3>Episode 6: "Boring the Devil"</h3>
+                <p>Fort Caspar presents a crossroads - continue north or turn west? Internal conflicts erupt as supplies dwindle and morale fractures.</p>
+                
+                <h3>Episode 7: "Lightning Yellow Hair"</h3>
+                <p>Elsa's relationship takes a fateful turn as the land itself seems to rise against the travelers. The price of love proves higher than imagined.</p>
+                
+                <h3>Episode 8: "The Weep of Surrender"</h3>
+                <p>A devastating loss forces the Duttons to confront whether their dream is worth the endless sacrifice. Some break while others find hidden strength.</p>
+                
+                <h3>Episode 9: "Racing Clouds"</h3>
+                <p>The survivors push through mountain passes, each carrying private grief. The land grows more beautiful and more deadly as they near their destination.</p>
+                
+                <h3>Episode 10: "This Is Not Your Heaven"</h3>
+                <p>The journey's end brings both deliverance and damnation. The Duttons stake their claim in Montana, forever changed by the trail that brought them there.</p>
+            </div>
+        </section>
+        
+        <section id="timeline">
+            <h2>The Oregon Trail</h2>
+            <p>Follow the actual route and timeline of the Duttons' historic journey from Texas to Montana.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Spring 1883 - Fort Worth, Texas</h3>
+                        <p>The Duttons join a wagon train of European immigrants preparing to head northwest. Supplies are gathered, wagons repaired, and final goodbyes said to civilization.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>April 1883 - Red River Crossing</h3>
+                        <p>The first major obstacle as wagons ford the treacherous river. Several lives are lost, serving as the group's first harsh lesson about frontier travel.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>May 1883 - Indian Territory</h3>
+                        <p>Crossing present-day Oklahoma, the group encounters both hostile and friendly Native American tribes while learning to navigate the open plains.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>June 1883 - Kansas Prairie</h3>
+                        <p>The endless grasslands bring new dangers - stampedes, prairie fires, and the psychological toll of the unrelenting horizon.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>July 1883 - Fort Caspar, Wyoming</h3>
+                        <p>A critical resupply point where the group must decide whether to continue west to Oregon or turn north toward Montana.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>August 1883 - Montana Territory</h3>
+                        <p>The final push through mountainous terrain to reach Paradise Valley, where the Duttons will establish their legacy.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="production">
+            <h2>Forging the Frontier</h2>
+            <p>How Taylor Sheridan and his team brought the authentic American West to life.</p>
+            
+            <h3>The Vision</h3>
+            <p>Sheridan sought to strip away a century of Western mythology to reveal the brutal reality of westward expansion. Extensive historical research informed every aspect, from wagon construction to period-accurate firearms.</p>
+            
+            <h3>On Location</h3>
+            <p>Filmed across Texas, Montana, and Oregon, the production sought landscapes untouched by modernity. The crew endured extreme weather to capture the authentic conditions pioneers faced.</p>
+            
+            <h3>The Details</h3>
+            <p>Over 200 authentic wagons were constructed. Costumes were aged and weathered by hand. Even the dirt on actors' faces was carefully matched to the specific geology of each filming location.</p>
+            
+            <div class="quote">
+                "We didn't want to make a Western. We wanted to show what it actually took to survive in 1883 when there was no law, no society - just the land and what you could do with your own two hands."
+            </div>
+        </section>
+        
+        <section id="reception">
+            <h2>Praises and Honors</h2>
+            <p>The critical and audience response to this groundbreaking portrayal of the American frontier.</p>
+            
+            <h3>Critical Acclaim</h3>
+            <p>Hailed as "the most authentic Western ever made," critics praised the series' unflinching realism, poetic narration, and standout performances. The Hollywood Reporter called it "a masterpiece that redefines the genre."</p>
+            
+            <h3>Audience Response</h3>
+            <p>Became Paramount+'s most-watched original series, sparking renewed interest in pioneer history. Fan communities meticulously analyzed each episode's historical accuracy.</p>
+            
+            <h3>Awards</h3>
+            <p>Recognized for cinematography, production design, and costumes. Sam Elliott's performance as Shea Brennan earned particular acclaim, along with Isabel May's breakout role as Elsa Dutton.</p>
+            
+            <div class="badge">Critical Darling</div>
+            <div class="badge">Audience Favorite</div>
+            <div class="badge">Award Winner</div>
+        </section>
+    </div>
+
+    <script>
+        const candle = document.querySelector('.candle-light');
+        candle.addEventListener('click', function() {
+            this.style.animation = 'none';
+            this.style.opacity = '0.5';
+            this.title = 'Click to relight';
+            
+            setTimeout(() => {
+                this.style.animation = 'flicker 3s infinite';
+                this.style.opacity = '1';
+                this.title = 'Click to extinguish';
+            }, 5000);
+        });
+        
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        function checkTimeline() {
+            const triggerBottom = window.innerHeight / 5 * 4;
+            
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                
+                if (itemTop < triggerBottom) {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }
+            });
+        }
+        
+        timelineItems.forEach(item => {
+            if (item.classList.contains('left')) {
+                item.style.transform = 'translateX(-50px)';
+            } else {
+                item.style.transform = 'translateX(50px)';
+            }
+            item.style.opacity = '0';
+            item.style.transition = 'all 0.8s ease';
+        });
+        
+        window.addEventListener('scroll', checkTimeline);
+        window.addEventListener('load', checkTimeline);
+    </script>
+</body>
+</html>
